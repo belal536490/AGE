@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>মিনি গেম - Catch the Dot</title>
+  <style>
+    :root { color-scheme: dark; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: linear-gradient(120deg, #101525, #18213a);
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      color: #ecf3ff;
+    }
+    .card {
+      width: min(92vw, 720px);
+      background: rgba(9, 12, 24, 0.8);
+      border: 1px solid rgba(144, 178, 255, 0.3);
+      border-radius: 20px;
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
+      padding: 18px;
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    .pill {
+      background: rgba(80, 120, 255, 0.15);
+      border: 1px solid rgba(150, 180, 255, 0.35);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+    button {
+      background: #5a83ff;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 15px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    button:hover { filter: brightness(1.07); }
+    #arena {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(97, 140, 255, 0.3), transparent 35%),
+        radial-gradient(circle at 80% 60%, rgba(52, 222, 193, 0.25), transparent 35%),
+        #0c1120;
+      border-radius: 16px;
+      border: 1px solid rgba(148, 182, 255, 0.32);
+      overflow: hidden;
+      user-select: none;
+    }
+    #dot {
+      position: absolute;
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #fff, #ffd13b 36%, #ff8f00 80%);
+      box-shadow: 0 0 22px rgba(255, 196, 0, 0.7);
+      cursor: pointer;
+      transition: left 0.12s ease, top 0.12s ease;
+    }
+    .msg { margin-top: 10px; opacity: .9; }
+  </style>
+</head>
+<body>
+  <section class="card">
+    <div class="topbar">
+      <div class="pill">স্কোর: <span id="score">0</span></div>
+      <div class="pill">সময়: <span id="time">20</span> সেকেন্ড</div>
+      <button id="startBtn">গেম শুরু</button>
+    </div>
+    <div id="arena" aria-label="game area">
+      <div id="dot" title="ক্লিক করো!"></div>
+    </div>
+    <p id="message" class="msg">হলুদ ডট-এ যত বেশি ক্লিক করতে পারবে, তত বেশি স্কোর।</p>
+  </section>
+
+  <script>
+    const arena = document.getElementById('arena');
+    const dot = document.getElementById('dot');
+    const scoreEl = document.getElementById('score');
+    const timeEl = document.getElementById('time');
+    const msgEl = document.getElementById('message');
+    const startBtn = document.getElementById('startBtn');
+
+    let score = 0;
+    let timeLeft = 20;
+    let running = false;
+    let timer;
+
+    function moveDot() {
+      const maxX = arena.clientWidth - dot.clientWidth;
+      const maxY = arena.clientHeight - dot.clientHeight;
+      dot.style.left = Math.floor(Math.random() * maxX) + 'px';
+      dot.style.top = Math.floor(Math.random() * maxY) + 'px';
+    }
+
+    function endGame() {
+      running = false;
+      clearInterval(timer);
+      msgEl.textContent = `গেম শেষ! তোমার স্কোর: ${score}`;
+      startBtn.disabled = false;
+      startBtn.textContent = 'আবার খেলি';
+    }
+
+    function startGame() {
+      score = 0;
+      timeLeft = 20;
+      running = true;
+      scoreEl.textContent = score;
+      timeEl.textContent = timeLeft;
+      msgEl.textContent = 'চল, দ্রুত ক্লিক করো!';
+      startBtn.disabled = true;
+      moveDot();
+
+      timer = setInterval(() => {
+        timeLeft -= 1;
+        timeEl.textContent = timeLeft;
+        moveDot();
+        if (timeLeft <= 0) endGame();
+      }, 1000);
+    }
+
+    dot.addEventListener('click', () => {
+      if (!running) return;
+      score += 1;
+      scoreEl.textContent = score;
+      moveDot();
+    });
+
+    startBtn.addEventListener('click', startGame);
+    window.addEventListener('resize', moveDot);
+    moveDot();
+  </script>
+</body>
+</html>
