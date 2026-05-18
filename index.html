@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="bn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ভয় জেনারেটর (Google TTS)</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <h1>👻 ভয় জেনারেটর</h1>
+      <p class="subtitle">ভৌতিক লাইন জেনারেট করুন এবং Google TTS দিয়ে ভয়েস শুনুন</p>
+
+      <section class="panel">
+        <label for="apiKey">Google Cloud API Key</label>
+        <input id="apiKey" type="password" placeholder="AIza..." />
+
+        <label for="theme">থিম</label>
+        <select id="theme">
+          <option value="ghost">ভূত</option>
+          <option value="dark-room">অন্ধকার ঘর</option>
+          <option value="forest">জঙ্গল</option>
+          <option value="cemetery">কবরস্থান</option>
+        </select>
+
+        <label for="customText">অথবা নিজের টেক্সট লিখুন</label>
+        <textarea id="customText" rows="4" placeholder="আজ রাত ৩টায় জানালার বাইরে কেউ ফিসফিস করে ডাকছে..."></textarea>
+
+        <div class="buttons">
+          <button id="generateBtn">ভয়ংকর টেক্সট জেনারেট</button>
+          <button id="speakBtn">🔊 ভয়েস প্লে</button>
+        </div>
+      </section>
+
+      <section class="output">
+        <h2>Generated Text</h2>
+        <p id="result">এখানে ভয়ংকর টেক্সট দেখাবে...</p>
+      </section>
+
+      <p class="note">
+        নোট: Google TTS ব্যবহার করতে Google Cloud Text-to-Speech API enable করতে হবে।
+      </p>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
