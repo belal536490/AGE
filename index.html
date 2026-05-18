@@ -12,8 +12,9 @@
       <p class="subtitle">ভৌতিক লাইন জেনারেট করুন এবং Google TTS দিয়ে ভয়েস শুনুন</p>
 
       <section class="panel">
-        <label for="apiKey">Google Cloud API Key</label>
+        <label for="apiKey">Google Cloud API Key (এখানে API Key দিন)</label>
         <input id="apiKey" type="password" placeholder="AIza..." />
+        <small class="help-text">Google Cloud Console → APIs & Services → Credentials থেকে API Key কপি করে এখানে পেস্ট করুন।</small>
 
         <label for="theme">থিম</label>
         <select id="theme">
@@ -37,8 +38,18 @@
         <p id="result">এখানে ভয়ংকর টেক্সট দেখাবে...</p>
       </section>
 
+      <section class="panel tips">
+        <h2>⚙️ সমস্যা হলে কী করবেন</h2>
+        <ul>
+          <li><strong>API Key error:</strong> নিশ্চিত করুন Text-to-Speech API enable করা আছে।</li>
+          <li><strong>No audio:</strong> ব্রাউজারের autoplay policy এড়াতে Speak বাটন ক্লিক করার পরই প্লে করুন।</li>
+          <li><strong>403 / Permission denied:</strong> Billing account active আছে কি না চেক করুন।</li>
+          <li><strong>Voice not found:</strong> `bn-BD-Standard-A` না পেলে `bn-IN-Standard-A` ব্যবহার করুন (script.js এ)।</li>
+        </ul>
+      </section>
+
       <p class="note">
-        নোট: Google TTS ব্যবহার করতে Google Cloud Text-to-Speech API enable করতে হবে।
+        নোট: API Key কখনো public repo-তে আপলোড করবেন না।
       </p>
     </main>
 

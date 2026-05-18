@@ -19,10 +19,7 @@ body {
   padding: 24px;
 }
 
-.app {
-  width: min(760px, 100%);
-}
-
+.app { width: min(760px, 100%); }
 h1 { margin-bottom: 8px; }
 .subtitle { margin-top: 0; opacity: 0.85; }
 
@@ -44,6 +41,13 @@ input, select, textarea, button {
   padding: 10px;
 }
 
+.help-text {
+  display: inline-block;
+  margin-top: 6px;
+  opacity: 0.8;
+  font-size: 0.9rem;
+}
+
 .buttons {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -57,7 +61,18 @@ button {
   border: none;
   font-weight: 700;
 }
-button:last-child { background: var(--danger); }
 
+button:last-child { background: var(--danger); }
 #result { min-height: 54px; line-height: 1.7; }
 .note { font-size: 0.9rem; opacity: 0.75; }
+
+.tips ul {
+  margin: 8px 0 0;
+  padding-left: 18px;
+  line-height: 1.8;
+}
+
+.tips h2 {
+  margin: 0 0 8px;
+  font-size: 1.15rem;
+}

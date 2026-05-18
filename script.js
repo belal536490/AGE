@@ -87,7 +87,14 @@ speakBtn.addEventListener("click", async () => {
   try {
     await speakWithGoogleTTS(text);
   } catch (e) {
-    alert(`সমস্যা হয়েছে: ${e.message}`);
+    const message = String(e.message || "Unknown error");
+    if (message.includes("403")) {
+      alert("Permission error (403)। API key restriction, billing, বা API enable চেক করুন।");
+    } else if (message.includes("400")) {
+      alert("Bad request (400)। টেক্সট খালি কি না, language/voice valid কি না চেক করুন।");
+    } else {
+      alert(`সমস্যা হয়েছে: ${message}`);
+    }
   } finally {
     speakBtn.disabled = false;
     speakBtn.textContent = "🔊 ভয়েস প্লে";
