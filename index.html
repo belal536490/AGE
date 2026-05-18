@@ -3,19 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ভয় জেনারেটর (Google TTS)</title>
+    <title>ভয় জেনারেটর (Browser TTS)</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <main class="app">
       <h1>👻 ভয় জেনারেটর</h1>
-      <p class="subtitle">ভৌতিক লাইন জেনারেট করুন এবং Google TTS দিয়ে ভয়েস শুনুন</p>
+      <p class="subtitle">ভৌতিক লাইন জেনারেট করুন এবং ব্রাউজারের TTS দিয়ে ভয়েস শুনুন</p>
 
       <section class="panel">
-        <label for="apiKey">Google Cloud API Key (এখানে API Key দিন)</label>
-        <input id="apiKey" type="password" placeholder="AIza..." />
-        <small class="help-text">Google Cloud Console → APIs & Services → Credentials থেকে API Key কপি করে এখানে পেস্ট করুন।</small>
-
         <label for="theme">থিম</label>
         <select id="theme">
           <option value="ghost">ভূত</option>
@@ -41,15 +37,14 @@
       <section class="panel tips">
         <h2>⚙️ সমস্যা হলে কী করবেন</h2>
         <ul>
-          <li><strong>API Key error:</strong> নিশ্চিত করুন Text-to-Speech API enable করা আছে।</li>
-          <li><strong>No audio:</strong> ব্রাউজারের autoplay policy এড়াতে Speak বাটন ক্লিক করার পরই প্লে করুন।</li>
-          <li><strong>403 / Permission denied:</strong> Billing account active আছে কি না চেক করুন।</li>
-          <li><strong>Voice not found:</strong> `bn-BD-Standard-A` না পেলে `bn-IN-Standard-A` ব্যবহার করুন (script.js এ)।</li>
+          <li><strong>No audio:</strong> ভলিউম, ডিভাইস সাউন্ড এবং ব্রাউজারের সাইট সাউন্ড অন আছে কিনা দেখুন।</li>
+          <li><strong>Voice not available:</strong> কিছু ব্রাউজারে বাংলা ভয়েস নাও থাকতে পারে; তখন ডিফল্ট ভয়েস ব্যবহার হবে।</li>
+          <li><strong>Speech blocked:</strong> Speak বাটন ক্লিক করে প্লে করুন (user interaction দরকার হয়)।</li>
         </ul>
       </section>
 
       <p class="note">
-        নোট: API Key কখনো public repo-তে আপলোড করবেন না।
+        নোট: এখানে কোনো API key লাগবে না — Browser built-in Text-to-Speech ব্যবহার করা হয়েছে।
       </p>
     </main>
 

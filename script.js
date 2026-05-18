@@ -21,7 +21,6 @@ const horrorByTheme = {
   ]
 };
 
-const apiKeyEl = document.getElementById("apiKey");
 const themeEl = document.getElementById("theme");
 const customTextEl = document.getElementById("customText");
 const resultEl = document.getElementById("result");
@@ -35,47 +34,53 @@ function generateHorrorText() {
   resultEl.textContent = pick;
 }
 
-async function speakWithGoogleTTS(text) {
-  const apiKey = apiKeyEl.value.trim();
-  if (!apiKey) {
-    alert("Google API Key দিন");
+function pickBestVoice(voices) {
+  const exactBnBd = voices.find((voice) => voice.lang.toLowerCase() === "bn-bd");
+  if (exactBnBd) return exactBnBd;
+
+  const anyBangla = voices.find((voice) => voice.lang.toLowerCase().startsWith("bn"));
+  if (anyBangla) return anyBangla;
+
+  return null;
+}
+
+function speakWithBrowserTTS(text) {
+  if (!("speechSynthesis" in window)) {
+    alert("আপনার ব্রাউজারে Speech Synthesis সাপোর্ট নেই। Chrome/Edge ব্যবহার করে দেখুন।");
     return;
   }
 
-  const endpoint = `https://texttospeech.googleapis.com/v1/text:synthesize?key=${apiKey}`;
+  window.speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.rate = 0.9;
+  utterance.pitch = 0.8;
 
-  const body = {
-    input: { text },
-    voice: {
-      languageCode: "bn-BD",
-      name: "bn-BD-Standard-A"
-    },
-    audioConfig: {
-      audioEncoding: "MP3",
-      speakingRate: 0.9,
-      pitch: -2.0
-    }
-  };
-
-  const res = await fetch(endpoint, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body)
-  });
-
-  if (!res.ok) {
-    const errText = await res.text();
-    throw new Error(`TTS failed: ${errText}`);
+  const voices = window.speechSynthesis.getVoices();
+  const chosen = pickBestVoice(voices);
+  if (chosen) {
+    utterance.voice = chosen;
+    utterance.lang = chosen.lang;
+  } else {
+    utterance.lang = "bn-BD";
   }
 
-  const data = await res.json();
-  const audio = new Audio(`data:audio/mp3;base64,${data.audioContent}`);
-  audio.play();
+  utterance.onend = () => {
+    speakBtn.disabled = false;
+    speakBtn.textContent = "🔊 ভয়েস প্লে";
+  };
+
+  utterance.onerror = () => {
+    speakBtn.disabled = false;
+    speakBtn.textContent = "🔊 ভয়েস প্লে";
+    alert("ভয়েস প্লে করতে সমস্যা হয়েছে। আবার চেষ্টা করুন।");
+  };
+
+  window.speechSynthesis.speak(utterance);
 }
 
 generateBtn.addEventListener("click", generateHorrorText);
 
-speakBtn.addEventListener("click", async () => {
+speakBtn.addEventListener("click", () => {
   const text = customTextEl.value.trim() || resultEl.textContent.trim();
   if (!text || text === "এখানে ভয়ংকর টেক্সট দেখাবে...") {
     alert("আগে টেক্সট লিখুন বা জেনারেট করুন");
@@ -83,20 +88,12 @@ speakBtn.addEventListener("click", async () => {
   }
 
   speakBtn.disabled = true;
-  speakBtn.textContent = "লোড হচ্ছে...";
-  try {
-    await speakWithGoogleTTS(text);
-  } catch (e) {
-    const message = String(e.message || "Unknown error");
-    if (message.includes("403")) {
-      alert("Permission error (403)। API key restriction, billing, বা API enable চেক করুন।");
-    } else if (message.includes("400")) {
-      alert("Bad request (400)। টেক্সট খালি কি না, language/voice valid কি না চেক করুন।");
-    } else {
-      alert(`সমস্যা হয়েছে: ${message}`);
-    }
-  } finally {
-    speakBtn.disabled = false;
-    speakBtn.textContent = "🔊 ভয়েস প্লে";
-  }
+  speakBtn.textContent = "প্লে হচ্ছে...";
+  speakWithBrowserTTS(text);
 });
+
+if ("speechSynthesis" in window) {
+  window.speechSynthesis.onvoiceschanged = () => {
+    window.speechSynthesis.getVoices();
+  };
+}
