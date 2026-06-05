@@ -39,6 +39,6 @@ npm run preview
 
 ## Vercel deployment
 
-This repository includes `vercel.json` so Vercel serves the generated `dist/` folder after `npm run build`.
+This repository includes `vercel.json` so Vercel runs `npm run build`, serves the generated `dist/` folder, and rewrites all routes to `index.html` to avoid Vercel `404: NOT_FOUND` responses for direct page loads.
 
 > This is a front-end prototype using `localStorage`. For production, add a secure backend, real authentication, database storage, video transcoding, CDN delivery, and moderation workflows.
