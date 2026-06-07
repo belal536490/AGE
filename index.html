@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>StreamSaver - Safe Video Download Helper</title>
+    <meta
+      name="description"
+      content="A safe video helper for downloading videos you own from direct file URLs and previewing YouTube videos without bypassing platform rules."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="brand" href="#top" aria-label="StreamSaver home">
+          <span class="brand__mark">▶</span>
+          <span>StreamSaver</span>
+        </a>
+        <div class="nav__links">
+          <a href="#tool">Tool</a>
+          <a href="#how-it-works">How it works</a>
+          <a href="#faq">FAQ</a>
+        </div>
+      </nav>
+
+      <section class="hero__content" id="top">
+        <p class="eyebrow">Safe • Fast • Browser based</p>
+        <h1>Download videos you own. Preview YouTube links responsibly.</h1>
+        <p class="hero__lede">
+          Paste a direct MP4, WebM, OGG, or MOV file link to create a download action.
+          YouTube links are shown as previews only, so the site stays respectful of creators,
+          copyright, and platform rules.
+        </p>
+        <div class="hero__actions">
+          <a class="button button--primary" href="#tool">Start now</a>
+          <a class="button button--ghost" href="#how-it-works">Learn more</a>
+        </div>
+      </section>
+    </header>
+
+    <main>
+      <section class="panel" id="tool" aria-labelledby="tool-title">
+        <div class="panel__intro">
+          <p class="eyebrow">Video helper</p>
+          <h2 id="tool-title">Paste your video URL</h2>
+          <p>
+            Use this tool for your own files, royalty-free assets, or direct video URLs where
+            you have permission to download. For YouTube, use the embedded player and official
+            sharing options.
+          </p>
+        </div>
+
+        <form class="tool" id="video-form">
+          <label for="video-url">Video URL</label>
+          <div class="tool__row">
+            <input
+              id="video-url"
+              name="video-url"
+              type="url"
+              inputmode="url"
+              placeholder="https://example.com/my-video.mp4 or https://youtu.be/..."
+              autocomplete="url"
+              required
+            />
+            <button class="button button--primary" type="submit">Analyze</button>
+          </div>
+
+          <fieldset class="format-picker" aria-describedby="format-help">
+            <legend>Download format</legend>
+            <div class="format-picker__grid">
+              <label class="format-option">
+                <input type="radio" name="format" value="auto" checked />
+                <span>Auto</span>
+              </label>
+              <label class="format-option">
+                <input type="radio" name="format" value="mp4" />
+                <span>MP4</span>
+              </label>
+              <label class="format-option">
+                <input type="radio" name="format" value="webm" />
+                <span>WebM</span>
+              </label>
+              <label class="format-option">
+                <input type="radio" name="format" value="ogg" />
+                <span>OGG</span>
+              </label>
+              <label class="format-option">
+                <input type="radio" name="format" value="mov" />
+                <span>MOV</span>
+              </label>
+            </div>
+            <p class="tool__hint" id="format-help">
+              Download options are shown for direct files. If you choose another format, this
+              browser-only app explains when conversion is needed instead of pretending to convert.
+            </p>
+          </fieldset>
+
+          <p class="tool__hint">
+            Tip: Direct file links end in formats like <strong>.mp4</strong>, <strong>.webm</strong>,
+            <strong>.ogg</strong>, or <strong>.mov</strong>.
+          </p>
+        </form>
+
+        <section class="result" id="result" aria-live="polite" hidden></section>
+      </section>
+
+      <section class="cards" id="how-it-works" aria-labelledby="how-title">
+        <div class="section-heading">
+          <p class="eyebrow">How it works</p>
+          <h2 id="how-title">Built for legitimate downloads</h2>
+        </div>
+        <article class="card">
+          <span class="card__icon">1</span>
+          <h3>Paste a URL</h3>
+          <p>Enter a direct video file link or a YouTube watch/share URL.</p>
+        </article>
+        <article class="card">
+          <span class="card__icon">2</span>
+          <h3>Get the right action</h3>
+          <p>Direct files get a download button. YouTube links get a creator-safe preview.</p>
+        </article>
+        <article class="card">
+          <span class="card__icon">3</span>
+          <h3>Stay compliant</h3>
+          <p>Only download content you own or have clear permission to save.</p>
+        </article>
+      </section>
+
+      <section class="faq" id="faq" aria-labelledby="faq-title">
+        <p class="eyebrow">FAQ</p>
+        <h2 id="faq-title">Common questions</h2>
+        <details>
+          <summary>Can this download YouTube videos?</summary>
+          <p>
+            No. The app does not extract or bypass YouTube video streams. It embeds YouTube
+            videos for viewing and links to the official video page.
+          </p>
+        </details>
+        <details>
+          <summary>What can I download?</summary>
+          <p>
+            Direct video file URLs that you own, created, licensed, or have permission to download.
+          </p>
+        </details>
+        <details>
+          <summary>Does the app store my links?</summary>
+          <p>No. It runs in your browser and does not send URLs to a backend server.</p>
+        </details>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© 2026 StreamSaver. Respect creators and download responsibly.</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
