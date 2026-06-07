@@ -5,7 +5,8 @@ StreamSaver is a static video helper website. It creates download actions for di
 ## Features
 
 - Responsive landing page and video URL form.
-- Download button for direct `.mp4`, `.webm`, `.ogg`, `.ogv`, and `.mov` links.
+- Download format picker for direct `.mp4`, `.webm`, `.ogg`, `.ogv`, and `.mov` links.
+- Shows which selected formats are available immediately and which require a conversion backend.
 - YouTube URL detection for watch, share, embed, and Shorts links.
 - YouTube-safe preview mode with an embedded player and official page link.
 - No backend and no stored user URLs.

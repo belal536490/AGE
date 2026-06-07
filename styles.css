@@ -166,6 +166,13 @@ h3 {
   transform: translateY(-2px);
 }
 
+button:disabled,
+button:disabled:hover {
+  cursor: not-allowed;
+  opacity: 0.58;
+  transform: none;
+}
+
 .button--primary {
   background: var(--primary);
   color: #fff;
@@ -257,6 +264,51 @@ input:focus {
   box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
 }
 
+.format-picker {
+  margin: 18px 0 0;
+  padding: 0;
+  border: 0;
+}
+
+.format-picker legend {
+  margin-bottom: 10px;
+  font-weight: 800;
+}
+
+.format-picker__grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.format-option {
+  position: relative;
+  display: grid;
+  min-height: 48px;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--muted);
+  cursor: pointer;
+  font-weight: 800;
+  transition: border-color 180ms ease, color 180ms ease, box-shadow 180ms ease;
+}
+
+.format-option:has(input:checked) {
+  border-color: var(--primary);
+  color: var(--primary-dark);
+  box-shadow: 0 0 0 4px rgba(239, 35, 60, 0.1);
+}
+
+.format-option input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .tool__hint {
   margin: 14px 0 0;
   font-size: 0.92rem;
@@ -292,6 +344,40 @@ input:focus {
   background: #fff7ed;
   color: #9a3412;
   font-weight: 700;
+}
+
+.format-results {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin: 18px 0;
+}
+
+.format-card {
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: #fff;
+}
+
+.format-card[aria-current="true"] {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(239, 35, 60, 0.1);
+}
+
+.format-card h4 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+}
+
+.format-card p {
+  min-height: 48px;
+  margin-bottom: 16px;
+  font-size: 0.92rem;
+}
+
+.format-card--disabled {
+  background: #f9fafb;
 }
 
 .cards {
@@ -353,6 +439,11 @@ input:focus {
   .tool__row {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .format-picker__grid,
+  .format-results {
+    grid-template-columns: 1fr;
   }
 
   .nav__links {

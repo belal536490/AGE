@@ -65,6 +65,37 @@
             />
             <button class="button button--primary" type="submit">Analyze</button>
           </div>
+
+          <fieldset class="format-picker" aria-describedby="format-help">
+            <legend>Download format</legend>
+            <div class="format-picker__grid">
+              <label class="format-option">
+                <input type="radio" name="format" value="auto" checked />
+                <span>Auto</span>
+              </label>
+              <label class="format-option">
+                <input type="radio" name="format" value="mp4" />
+                <span>MP4</span>
+              </label>
+              <label class="format-option">
+                <input type="radio" name="format" value="webm" />
+                <span>WebM</span>
+              </label>
+              <label class="format-option">
+                <input type="radio" name="format" value="ogg" />
+                <span>OGG</span>
+              </label>
+              <label class="format-option">
+                <input type="radio" name="format" value="mov" />
+                <span>MOV</span>
+              </label>
+            </div>
+            <p class="tool__hint" id="format-help">
+              Download options are shown for direct files. If you choose another format, this
+              browser-only app explains when conversion is needed instead of pretending to convert.
+            </p>
+          </fieldset>
+
           <p class="tool__hint">
             Tip: Direct file links end in formats like <strong>.mp4</strong>, <strong>.webm</strong>,
             <strong>.ogg</strong>, or <strong>.mov</strong>.
