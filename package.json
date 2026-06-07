@@ -1,0 +1,11 @@
+{
+  "name": "video-hub-admin-portal",
+  "version": "1.0.0",
+  "description": "A YouTube-style video sharing portal with user accounts, admin uploads, and owner controls.",
+  "private": true,
+  "scripts": {
+    "start": "node scripts/serve.js .",
+    "preview": "npm run build && node scripts/serve.js dist",
+    "build": "node scripts/build.js"
+  }
+}
