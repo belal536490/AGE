@@ -1,0 +1,13 @@
+node_modules/
+.next/
+dist/
+build/
+.env
+.env.local
+uploads/
+storage/
+*.log
+__pycache__/
+.pytest_cache/
+.venv/
+.DS_Store
